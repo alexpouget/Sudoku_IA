@@ -89,4 +89,14 @@ public class Agent {
             e.printStackTrace();
         }
     }
+
+    public void resolve() {
+        for (Case c: list
+             ) {
+            if(c.getValue()!=0){
+                continue;
+            }
+            c.eval();
+        }
+    }
 }

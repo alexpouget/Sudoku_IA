@@ -11,6 +11,8 @@ import java.awt.*;
  */
 public class Window extends JFrame {
 
+    JPanel sudoku;
+
     public Window(){
         setTitle("sudoku");
         setResizable(false);
@@ -19,11 +21,15 @@ public class Window extends JFrame {
         Container container = getContentPane();
 
         //JPanel Sudoku
-        JPanel sudoku = new Sudoku();
+        sudoku = new Sudoku();
         container.add(sudoku);
 
 
 
         setVisible(true);
+    }
+
+    public void repaintPanel() {
+        sudoku.repaint();
     }
 }

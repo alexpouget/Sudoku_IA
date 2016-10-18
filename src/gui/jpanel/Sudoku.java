@@ -30,4 +30,6 @@ public class Sudoku extends JPanel {
             this.add(label);
         }
     }
+
+
 }
