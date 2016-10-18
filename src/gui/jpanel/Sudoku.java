@@ -1,5 +1,7 @@
 package gui.jpanel;
 
+import ia.Agent;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -8,25 +10,22 @@ import java.util.ArrayList;
  * Created by alex on 17/10/2016.
  */
 public class Sudoku extends JPanel {
+    private Agent agent;
 
     public Sudoku() {
-        setBackground(Color.BLACK);
-        setLayout(new GridLayout(3,3));
-        ArrayList<JTextField> fieldArrayList = new ArrayList<>();
-        for(int i=0;i<9;i++){
-            JPanel panel = new JPanel();
-            panel.setLayout(new GridLayout(3,3));
-            for(int y=0;y<9;y++){
-                JTextField field = new JTextField();
-                fieldArrayList.add(field);
-                panel.add(field);
+        agent = Agent.getAgent();
+        setBackground(Color.WHITE);
+        setLayout(new GridLayout(9,9));
+        ArrayList<JLabel> fieldArrayList = new ArrayList<>();
 
-            }
-            panel.setBorder(BorderFactory.createLineBorder(Color.black));
-            this.add(panel);
+        for(int i=0;i<81;i++){
+            JLabel label = new JLabel();
+            fieldArrayList.add(label);
+            label.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+
+            label.setText(String.valueOf(agent.getList().get(i).getValue()));
+
+            this.add(label);
         }
-
-
-
     }
 }
