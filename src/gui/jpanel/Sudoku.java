@@ -20,6 +20,8 @@ public class Sudoku extends JPanel {
 
         for(int i=0;i<81;i++){
             JLabel label = new JLabel();
+            label.setHorizontalAlignment(SwingConstants.CENTER);
+            label.setVerticalAlignment(SwingConstants.CENTER);
             fieldArrayList.add(label);
             label.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 

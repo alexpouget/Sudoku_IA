@@ -2,6 +2,7 @@ package ia;
 
 import entity.Case;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,5 +62,31 @@ public class Agent {
 
     public List<Case> getList() {
         return list;
+    }
+
+    public void readSudoku(String s) {
+        try {
+            FileReader file = new FileReader(new File(s));
+            BufferedReader buf = new BufferedReader(file);
+            String line = buf.readLine();
+            int i = 0;
+            for (Case c: list) {
+                if(i==9){
+                    line=buf.readLine();
+                    i=0;
+                }
+                if(String.valueOf(line.charAt(i)).equals("*")){
+                    c.setValue(0);
+                    i++;
+                    continue;
+                }
+                c.setValue(Integer.valueOf(String.valueOf(line.charAt(i))));
+                i++;
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
