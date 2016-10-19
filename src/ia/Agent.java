@@ -91,12 +91,29 @@ public class Agent {
     }
 
     public void resolve() {
-        for (Case c: list
-             ) {
-            if(c.getValue()!=0){
-                continue;
+        //res by value
+        int resolved = -1;
+        while(0 != resolved) {
+            resolved = 0;
+            for (Case c : list) {
+                if (c.getValue() != 0) {
+                    continue;
+                }
+                if (c.eval()) {
+                    resolved++;
+                }
+                ;
             }
-            c.eval();
         }
+        //check if all have value
+        resolved = 0;
+        for (Case c : list) {
+            if (c.getValue() == 0) {
+                resolved++;
+                break;
+            }
+        }
+        //resolve by possibility
+
     }
 }

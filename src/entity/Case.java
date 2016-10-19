@@ -98,7 +98,7 @@ public class Case {
         this.possible = possible;
     }
 
-    public void eval() {
+    public boolean eval() {
         for (Case c: relations
              ) {
             if(c.getValue()!=0){
@@ -110,7 +110,9 @@ public class Case {
         if(this.possible.size()==1){
             this.setValue(this.possible.get(0));
             System.out.println("change value");
+            return true;
+            //value has attributed
         }
-        System.out.println(this.possible.size()+" - "+this.getValue());
+        return false;
     }
 }

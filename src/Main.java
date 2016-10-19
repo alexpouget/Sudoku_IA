@@ -14,9 +14,7 @@ public class Main {
         }
         System.out.println("after sleep");
         agent.resolve();
-        agent.resolve();
-        agent.resolve();
-        agent.resolve();
-        
+
+
     }
 }
