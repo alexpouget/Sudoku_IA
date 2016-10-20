@@ -14,7 +14,7 @@ public class Main {
         }
         System.out.println("after sleep");
         agent.resolve();
-
+        window.repaintPanel();
 
     }
 }

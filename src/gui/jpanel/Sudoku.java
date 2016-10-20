@@ -11,12 +11,13 @@ import java.util.ArrayList;
  */
 public class Sudoku extends JPanel {
     private Agent agent;
+    ArrayList<JLabel> fieldArrayList = new ArrayList<>();
 
     public Sudoku() {
         agent = Agent.getAgent();
         setBackground(Color.WHITE);
         setLayout(new GridLayout(9,9));
-        ArrayList<JLabel> fieldArrayList = new ArrayList<>();
+
 
         for(int i=0;i<81;i++){
             JLabel label = new JLabel();
@@ -31,5 +32,11 @@ public class Sudoku extends JPanel {
         }
     }
 
-
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+        for(int i=0;i<81;i++){
+            fieldArrayList.get(i).setText(String.valueOf(agent.getList().get(i).getValue()));
+        }
+    }
 }
