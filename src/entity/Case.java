@@ -23,7 +23,7 @@ public class Case {
         this.position = position;
         this.value = value;
         for(int i = 1;i<10;i++){
-            possible.add(i);
+            this.possible.add(i);
         }
     }
 
@@ -34,7 +34,7 @@ public class Case {
         this.column = column;
         this.square = square;
         for(int i = 1;i<10;i++){
-            possible.add(i);
+            this.possible.add(i);
         }
     }
 
@@ -114,5 +114,85 @@ public class Case {
             //value has attributed
         }
         return false;
+    }
+
+    public boolean reeval(){
+        //by square
+        int result = 0;
+        if((result = bySquare())!=0){
+            this.setValue(result);
+            this.possible = new ArrayList<>();
+            this.possible.add(0,this.getValue());
+            return true;
+        }
+        //byLine
+        else if((result = byLine())!=0){
+            this.setValue(result);
+            this.possible = new ArrayList<>();
+            this.possible.add(0,this.getValue());
+            return true;
+        }
+        //byColumn
+        else if((result = byColumn())!=0){
+            this.setValue(result);
+            this.possible = new ArrayList<>();
+            this.possible.add(0,this.getValue());
+            return true;
+        }
+        return false;
+    }
+
+    public int bySquare(){
+        for (int p:possible) {
+            boolean contain = false;
+            for (Case c: relations) {
+                if(c.getPosition()!= this.getPosition() && c.getValue()==0 && c.getSquare()==this.getSquare()){
+                    if(c.possible.contains(p)){
+                        contain = true;
+                        break;
+                    }
+                }
+            }
+            if(!contain){
+                return p;
+            }
+        }
+        return 0;
+    }
+
+    public int byLine(){
+        for (int p:possible) {
+            boolean contain = false;
+            for (Case c: relations) {
+                if(c.getPosition()!= this.getPosition() && c.getValue()==0 && c.getLine()==this.getLine()){
+                    if(c.possible.contains(p)){
+                        contain = true;
+                        break;
+                    }
+                }
+            }
+            if(!contain){
+                return p;
+            }
+        }
+        return 0;
+    }
+
+    public int byColumn(){
+        for (int p:possible) {
+            boolean contain = false;
+            for (Case c: relations) {
+                if(c.getPosition()!= this.getPosition() && c.getValue()==0 && c.getColumn()==this.getColumn()){
+                    if(c.possible.contains(p)){
+                        contain = true;
+                        break;
+                    }
+                }
+            }
+            if(!contain){
+                return p;
+            }
+        }
+        return 0;
     }
 }

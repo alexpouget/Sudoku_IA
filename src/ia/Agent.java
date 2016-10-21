@@ -92,29 +92,55 @@ public class Agent {
 
     public void resolve() {
         //res by value
-        int resolved = -1;
-        while(0 != resolved) {
+        do{
+            int resolved = -1;
+            while (0 != resolved) {
+                resolved = 0;
+                for (Case c : list) {
+                    if (c.getValue() != 0) {
+                        continue;
+                    }
+                    if (c.eval()) {
+                        resolved++;
+                    }
+                }
+            }
+            //check if all have value
             resolved = 0;
             for (Case c : list) {
-                if (c.getValue() != 0) {
-                    continue;
-                }
-                if (c.eval()) {
+                if (c.getValue() == 0) {
                     resolved++;
+                    break;
                 }
-                ;
             }
-        }
-        //check if all have value
-        resolved = 0;
+            //resolve by possibility
+            if (resolved > 0) {
+                resolved = 0;
+                for (Case c : list) {
+                    if (c.getValue() != 0) {
+                        continue;
+                    }
+                    if (c.reeval()) {
+                        resolved++;
+                        break;
+                    }
+                }
+            }
+        }while(!allResolved());
+    }
+
+    private boolean allResolved() {
         for (Case c : list) {
             if (c.getValue() == 0) {
-                resolved++;
-                break;
+                List<Integer> poss = new ArrayList<>();
+                for(int i = 1;i<10;i++){
+                    poss.add(i);
+                }
+                c.setPossible(poss);
+                System.out.println("again");
+                return false;
             }
         }
-        //resolve by possibility
-
-
+        return true;
     }
 }
